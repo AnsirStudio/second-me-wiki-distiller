@@ -1,0 +1,110 @@
+# 蒸馏模式
+
+用于把 `raw/inbox/`、剪藏、文章、聊天、社交媒体、书籍、研究、截图、PDF、视频转录、GitHub 项目或其他 raw 素材正式蒸馏进 `wiki/` 和 `self/`。
+
+核心原则：一步一步做。不要在开头读完所有 reference/schema；每一步只读当前判断需要的文件。
+
+## Step 1：定范围
+
+不需要先读 reference/schema。只检查用户指定的路径、`raw/inbox/`、`raw/inbox/clipping/` 或用户提供的素材列表。
+
+本步是内部范围判定，不需要向用户发送中间结果，除非需要用户决定批次。
+
+内部记录：
+
+- 待处理素材数量；
+- 本轮处理范围；
+- 是否需要分批。
+
+如果未处理项超过 10 个，先告知用户批量较大，建议按主题、来源类型或日期分批；除非用户明确要求全量处理，否则只处理一个有边界的批次。
+
+## Step 2：认领与 raw 规范化
+
+现在读取：
+
+- `references/raw.md`
+- `schemas/raw.md`
+
+对每个素材判断：
+
+- 素材类型和原始路径；
+- 是否已经是 markdown；
+- 如果是 PDF、图片、视频、PPT、音频等二进制或非 markdown 文件，是否需要放入 `raw/attachment/` 并创建一个最小 markdown 指针文件；
+- 标题、作者/平台、日期、original_url；
+- 是否有附件需要查看；
+- 是否与已有 raw 素材重复。
+
+认领规则：
+
+- 来自 `raw/inbox/` 或 `raw/inbox/clipping/` 的素材，处理时要移出 inbox，放入最合适的 raw 分类；这表示本轮已经认领该素材。
+- 来自 `raw/dropzone/` 的素材，如果已经能判断分类，也移入最合适的 raw 分类；如果仍然过碎或方向不清，就继续留在 `raw/dropzone/`。
+- 已经在 `raw/articles/`、`raw/books/`、`raw/chats/`、`raw/design/`、`raw/ideas/`、`raw/research/`、`raw/videos/`、`raw/work/`、`raw/socialmedia/` 等分类中的素材，不为了“认领”而移动。
+- 非 markdown 附件放入 `raw/attachment/`，并在合适的 raw 分类下创建 markdown 指针文件；后续蒸馏引用这个指针文件。
+- 本步骤只处理 raw 层的分类、指针、附件和 raw 去重；不要判断是否与 wiki 页面重复，也不要写 `log.md` 或 `nextstep.md`。这些放到后续写入和收尾步骤。
+
+## Step 3：内容阅读与初筛
+
+仍只使用 raw 规则；不要急着读取 wiki/self schema。
+
+阅读素材本身，输出初筛：
+
+- 这份素材是否值得蒸馏；
+- 是否只适合 `raw/dropzone/` 或未来再看；
+- 是否值得创建 `wiki/summary/`；
+- 是否包含明显 self 信号；
+- 是否包含 wiki 知识候选；
+- 是否包含值得保留的 quote。
+
+如果素材太弱，只按 `wiki/scrap/` 或 `raw/dropzone/` 处理，不硬塞成正式条目。
+
+## Step 4：判定 wiki/self 落点
+
+到这一步才按需要读取：
+
+- 有 wiki 候选时读 `references/wiki.md`
+- 有 self 信号时读 `references/self.md`
+
+对每条候选先判定，再写入：
+
+1. wiki 候选属于 `concept/entity/topic/summary/method/tip/github/comparison/quote/scrap` 哪一类。
+2. self 信号属于明确事实、强推断还是弱信号。
+3. 是否需要补充当前来源或一手来源。
+4. 是否优先更新已有页面，而不是新建。
+
+弱 self 信号不要马上写进 `self/identity.md` 或 `self/preferences.md`。让它留在 `log.md` 中，审查模式再聚合。
+
+## Step 5：写入页面
+
+到这一步才读取具体 schema：
+
+- 写 wiki 页面时读 `schemas/common.md` 和 `schemas/wiki.md`
+- 写 self 页面时读 `schemas/common.md` 和 `schemas/self.md`
+- 写 root 文件时读 `schemas/root.md`
+
+写入规则：
+
+- 先更新已有页面，再创建新页面。
+- summary 一对一对应重要 raw 来源。
+- self 只写明确事实和强证据；敏感或模糊推断写入 `nextstep.md` 等用户确认。
+- quote 放入 `wiki/quotes/`，不做独立 quotes 层。
+- 冲突不调和，保留双方来源和日期。
+- 所有实质性页面补时间线。
+
+## Step 6：收尾检查
+
+读取 `schemas/root.md`，检查：
+
+- 新增/更新页面已进 `index.md`。
+- `log.md` 记录本批来源、动作、topic、页面数量、弱信号。
+- `nextstep.md` 记录数据缺口、待确认 self 推断、待深挖对象。
+- 断链、重复页、未填字段已检查。
+
+## 输出
+
+给出批次报告：
+
+1. 处理了哪些来源。
+2. 新建/更新了哪些页面。
+3. 哪些判断有冲突或低置信度。
+4. 哪些事项进入 `nextstep.md`。
+5. 建议下一批处理什么。
