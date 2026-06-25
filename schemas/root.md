@@ -36,6 +36,10 @@
 
 `index.md` 只索引"编译后的知识"层（concept/entity/topic/method/tip/github/comparison/quote），**不索引 summary**。summary 是 raw 的前引速读，不是核心知识页（见 `schemas/wiki.md`），把它也列进 index.md 会让根导航随来源数量线性膨胀、稀释"先扫 tldr"的作用。summary 的可达性由它所属的 entity/concept 页面的"已蒸馏作品"或"关联"链接保证：检索路径是 index → entity/concept → summary（如果想看更细）→ raw（如果想看原文），不需要 index.md 兜底。
 
+`index.md` 每条只放跟该页面 frontmatter `tldr` 等量的一句话，**不要**在 index 里另起一份比 tldr 更详细的描述，尤其不要把"已蒸馏作品"逐条列出来贴进 index——entity 页更新了多少条来源、覆盖了哪些主题，这些细节属于 entity 页本身（或它的台账文件），index.md 只需要这条 entity 现在"是什么"。entity 页的 tldr 改了，index.md 对应行跟着同步；不要各自独立生长出两份不同详细程度的描述。
+
+`index.md` 的章节标题只能是受控词表里的顶层类型（概念/实体/话题/方法/小技巧/GitHub/对比/引用/碎片/自我记忆），不要为某个主题/平台/厂商再开一个同级 `##` 标题（例如"Google AI 产品栈""YouTube/内容创作者"）——那些本质上还是实体，应该写成对应顶层标题下的 `###` 子分组，否则会被误读成跟"实体"平级的新分类。
+
 ## log.md
 
 操作日志只追加，记录库发生了什么。最新记录靠前。
