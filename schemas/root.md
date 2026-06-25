@@ -17,8 +17,6 @@
 
 ## 话题
 
-## 来源总结
-
 ## 方法
 
 ## 小技巧
@@ -35,6 +33,8 @@
 ```
 
 超过 1000 条时，可以建议增加本地搜索、BM25 或向量层，但仍保留 `index.md`。
+
+`index.md` 只索引"编译后的知识"层（concept/entity/topic/method/tip/github/comparison/quote），**不索引 summary**。summary 是 raw 的前引速读，不是核心知识页（见 `schemas/wiki.md`），把它也列进 index.md 会让根导航随来源数量线性膨胀、稀释"先扫 tldr"的作用。summary 的可达性由它所属的 entity/concept 页面的"已蒸馏作品"或"关联"链接保证：检索路径是 index → entity/concept → summary（如果想看更细）→ raw（如果想看原文），不需要 index.md 兜底。
 
 ## log.md
 
