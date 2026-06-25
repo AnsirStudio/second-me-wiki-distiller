@@ -29,8 +29,9 @@
 
 ## 来源
 
-- `raw/path/or-url` - 简短说明；网页写访问日期。
-- 补充搜索资料、背景链接、延伸阅读放这里；YAML `original_url` 只保留核心来源，且不要使用 `sources` 字段。
+- `raw/path` 或 `[[wiki/summary/example]]` - 本地素材、summary 前引或内部证据；不要写入 YAML `original_url`。
+- `https://example.com` - 外部网页、视频、帖子、论文或项目主页；网页写访问日期。只有直接支撑页面主结论的外部 URL 才能同步进入 YAML `original_url`。
+- 补充搜索资料、背景链接、延伸阅读放这里；YAML `original_url` 只保留核心外部 URL，且不要使用 `sources` 字段。没有外部 URL 时，`original_url` 必须是空数组 `[]`。
 
 ## 时间线
 

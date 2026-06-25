@@ -101,6 +101,7 @@
 - 先更新已有页面，再创建新页面。
 - summary 一对一对应重要 raw 来源，只做前引速览，不当作核心 wiki 成果。
 - 写 concept/entity/method/tip 等页面前必须搜索现有 wiki：优先补充、修正、加来源和互链；只有没有合适承接页时才新建。
+- 写入或更新任何 wiki/self 页面前，先清洗 YAML `original_url`：只保留 `http://` 或 `https://` 外部 URL。本地 `.md` 路径、`raw/...` 路径、`wiki/summary/...` 页面、Obsidian 内链、附件路径、绝对/相对文件路径、对话里的本地文档链接全部不能进入 `original_url`；这些证据关系写到正文 `## 来源` 或 `related`。没有外部 URL 就写 `original_url: []`。
 - self 只写明确事实和强证据；敏感或模糊推断写入 `pending.md` 等用户确认。
 - quote 放入 `wiki/quotes/`，不做独立 quotes 层。
 - 冲突不调和，保留双方来源和日期。

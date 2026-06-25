@@ -32,7 +32,7 @@ status: unprocessed
 - `author`：作者、创作者、对话参与者或机构；不知道就留空。
 - `creator`：社媒创作者名；`raw_type: socialmedia` 时必填，且必须等于 `raw/socialmedia/{创作者名}/` 的父文件夹名。
 - `platform`：YouTube、Douyin、X、博客、PDF、微信等。
-- `original_url`：原始链接；没有就留空。
+- `original_url`：外部原始链接；只允许 `http://` 或 `https://`。没有外部 URL 就留空，不要写本地 `.md` 路径、raw 路径、附件路径、绝对/相对文件路径或内部 wiki 链接。
 - `attachment`：附件路径数组，例如 `["raw/attachment/report.pdf"]`。
 - `status`：处理状态。
 
