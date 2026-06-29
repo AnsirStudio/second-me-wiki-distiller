@@ -38,9 +38,15 @@
 
 - 来自 `raw/inbox/` 或 `raw/inbox/clipping/` 的素材，处理时要移出 inbox，放入最合适的 raw 分类；这表示本轮已经认领该素材。
 - 来自 `raw/dropzone/` 的素材，如果已经能判断分类，也移入最合适的 raw 分类；如果仍然过碎或方向不清，就继续留在 `raw/dropzone/`。
-- 已经在 `raw/articles/`、`raw/books/`、`raw/chats/`、`raw/design/`、`raw/ideas/`、`raw/research/`、`raw/videos/`、`raw/work/`、`raw/socialmedia/` 等分类中的素材，不为了“认领”而移动。
+- 已经在 `raw/articles/`、`raw/books/`、`raw/chats/`、`raw/design/`、`raw/ideas/`、`raw/research/`、`raw/videos/`、`raw/work/`、`raw/socialmedia/` 等分类中的素材，不为了”认领”而移动。
 - 非 markdown 附件放入 `raw/attachment/`，并在合适的 raw 分类下创建 markdown 指针文件；后续蒸馏引用这个指针文件。
 - 本步骤只处理 raw 层的分类、指针、附件和 raw 去重；不要判断是否与 wiki 页面重复，也不要写 `log.md` 或 `pending.md`。这些放到后续写入和收尾步骤。
+
+**文件移动硬规则（必须遵守）**：
+
+- 所有 inbox 素材的移动操作**必须使用 `mv` 指令**（Desktop Commander 的 `move_file` 或 shell 的 `mv`），将文件从 inbox 路径直接移动到目标路径。
+- **严禁使用 `cp`（复制）+ `rm`（删除）的两步操作**：`cp` 先于 `rm` 意味着如果 `rm` 失败（权限不足、路径错误等），inbox 里会留下重复文件，产生污染。`mv` 是原子操作，不存在此风险。
+- 如果目标路径需要改文件名（如 inbox 使用 ID 命名、目标路径使用语义命名），直接在 `mv` 命令中同时完成重命名：`mv <旧路径/旧文件名> <新路径/新文件名>`。
 
 ## Step 3：内容阅读与初筛
 
