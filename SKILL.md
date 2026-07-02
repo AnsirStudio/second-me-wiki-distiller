@@ -25,6 +25,7 @@ description: 构建和维护一个由 LLM 维护的个人 Markdown 知识库与 
 - `modes/distill.md`：处理 `raw/inbox/` 或其他 raw 素材并正式蒸馏。
 - `modes/review.md`：审查、健康检查、合并提议、长期 self 升维。
 - `modes/search.md`：只读检索和总结，不写入。
+- `modes/integrate.md`：并行编排时，编排者把多个 capture-only 子 agent 的 proposal 统一落库（唯一写手、串行）。
 - `references/raw.md`：raw 目录、来源分类、附件、重复素材处理。
 - `references/wiki.md`：wiki 页面类型判断、边界、写入规则。
 - `references/self.md`：self 五件套、证据等级、second me 画像规则。
@@ -33,6 +34,7 @@ description: 构建和维护一个由 LLM 维护的个人 Markdown 知识库与 
 - `schemas/wiki.md`：wiki 各类型页面的 frontmatter 与正文结构。
 - `schemas/self.md`：self 五件套 schema。
 - `schemas/root.md`：`index.md`、`log.md`、`pending.md` 格式。
+- `schemas/proposal.md`：并行编排时 capture-only → integrate 的暂存提案格式。
 
 不要一次读完所有资源。按 mode 的步骤逐步读取。
 
@@ -64,6 +66,8 @@ description: 构建和维护一个由 LLM 维护的个人 Markdown 知识库与 
 4. 用户要处理 `raw/inbox/`、剪藏、长文、聊天、社媒、PDF、视频转录、GitHub 项目或其他 raw 素材 → 读 `modes/distill.md`。
 
 如果模式不确定，优先判断用户是否要求写入；写入但来源还没被整理，走蒸馏；纯查询走检索；维护库本身走审查。
+
+> **并行编排补充**：蒸馏模式有一个 `capture-only` 变体（每个子 agent 只认领一条，只写自己的 summary + raw + `_staging/<id>.md` proposal，不碰共享页），配合 `integrate` 模式（编排者把多条 proposal 统一落库）。约束写在 `modes/distill.md` 的"执行模式"节；**何时并行、怎么派子 agent，由调用方项目的 CLAUDE.md 决定，不在本 skill。**
 
 ## 共享硬规则
 
