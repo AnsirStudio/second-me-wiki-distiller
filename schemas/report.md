@@ -19,6 +19,7 @@ scope: "游标后变更 + 全库机械层"   # 本轮切片描述
 pages_checked: 0
 issues_found: 0
 fixed: 0
+pending_verified: 0          # 本轮联网核实并落库的 pending 缺口数
 needs_decision: 0
 flags_open: []               # 本轮未处理完的旗标，滚动携带，下一轮判断层的输入
 metrics:                     # 库指标快照（机械统计，供 rollup 聚合出趋势）
